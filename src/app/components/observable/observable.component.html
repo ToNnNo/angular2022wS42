@@ -1,0 +1,47 @@
+<header>
+  <h2>Les Observables</h2>
+</header>
+
+<p>
+  Consulter la doc <a href="https://rxjs-dev.firebaseapp.com/api" target="_blank"> RxJS </a>
+  (Reactive Extensions for JavaScript)
+</p>
+
+<ul>
+  <li>Un Observable peut émettre plusieurs jeux de résultat au court du temps</li>
+  <li>Un Observable a 3 états:
+    <ul>
+      <li>La réussite: next() - Retourne une valeur plusieur au court du temps</li>
+      <li>L'échec: error() - Retourne une erreur, et ferme la communication</li>
+      <li>Terminé: complete() - Termine la communication</li>
+    </ul>
+  </li>
+  <li>Pour obtenir une information d'un observable, il faut s'y abonner (subscribe())</li>
+  <li>Je peux me désabonner d'un observable (unsubscribe())</li>
+</ul>
+
+<section>
+  <h3>l'Observable</h3>
+
+  <button class="btn btn-outline-primary my-3" (click)="start()" [disabled]="disabled"> Démarrer le compteur </button>
+
+  <p>{{ number }}</p>
+
+</section>
+
+<section>
+  <h3>Les Subjects</h3>
+
+  <h4>Subject</h4>
+  <button class="btn btn-outline-primary my-3" (click)="subject()" > Démarrer le subject </button>
+
+  <h4>BehaviorSubject</h4>
+  <button class="btn btn-outline-primary my-3" (click)="behaviorSubject()" > Démarrer le behavior subject </button>
+
+  <h4>ReplaySubject</h4>
+  <button class="btn btn-outline-primary my-3" (click)="replaySubject()" > Démarrer le replay subject </button>
+
+  <h4>AsyncSubject</h4>
+  <button class="btn btn-outline-primary my-3" (click)="asyncSubject()" > Démarrer le async subject </button>
+
+</section>

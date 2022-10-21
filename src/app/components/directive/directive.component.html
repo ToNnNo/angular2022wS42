@@ -1,0 +1,158 @@
+<header>
+  <h2>Les directives</h2>
+</header>
+
+<ul>
+  <li>Les directives structurelles : Elles ont pour but de modifier le DOM en ajoutant,
+    enlevant ou replaçant un élément du DOM.
+  </li>
+
+  <li>Les directives d'attributs : Elles ont pour but de modifier l'apparence ou le
+    comportement d'un élément.
+  </li>
+</ul>
+
+<p>Tous les attributs HTML, existe sous la forme d'une directive angular</p>
+<p>Un composant Angular, est une directive particulière (1 fichier .ts (logique) et 1 fichier .html (vue))</p>
+
+<section class="row">
+  <h3>Directives Structurelles</h3>
+
+  <article>
+    <h4>ngIf</h4>
+
+    <button class="btn btn-outline-primary btn-sm mb-3" (click)="show = !show"> Basculer</button>
+
+    <p *ngIf="show">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dicta dolore exercitationem laudantium
+      maxime nam unde veritatis voluptate. Alias nam neque nesciunt officia porro recusandae saepe voluptatem! Aliquam,
+      cum quod?</p>
+
+    <p *ngIf="show; else sinon">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dicta dolore exercitationem
+      laudantium maxime nam unde veritatis voluptate. Alias nam neque nesciunt officia porro recusandae saepe
+      voluptatem!
+      Aliquam, cum quod?</p>
+
+    <ng-template #sinon>
+      <p>Lorem ipsum dolor sit amet, [...] Aliquam, cum quod?</p>
+    </ng-template>
+
+
+    <div class="alert alert-info" *ngIf="information(); let message">
+      Information: {{ message }}
+    </div>
+
+    <div class="alert alert-success" *ngIf="information() as message">
+      Bravo ! {{ message }}
+    </div>
+  </article>
+
+  <article class="col">
+    <h4>ngForOf</h4>
+
+    <ul> <!-- even/odd - first/last -->
+      <li *ngFor="let letter of ['a', 'b', 'c']; index as index; even as even; last as last">
+        {{ letter }} (index: {{ index }}) (even: {{ even }}) {{ last ? 'Fini !' : '' }}
+      </li>
+    </ul>
+
+  </article>
+
+  <article class="col">
+    <h4>ngSwitch</h4>
+
+    <div class="btn-group btn-group-sm">
+      <button class="btn btn-outline-primary" (click)="display = 'horizontal' ">Horizontal</button>
+      <button class="btn btn-outline-primary" (click)="display = 'vertical' ">Vertical</button>
+      <button class="btn btn-outline-primary" (click)="display = undefined ">Aucun</button>
+    </div>
+
+    <div [ngSwitch]="display">
+
+      <ul class="list-unstyled" *ngSwitchCase=" 'vertical' ">
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+        <li>Element 5</li>
+      </ul>
+
+      <ul class="list-inline" *ngSwitchCase=" 'horizontal' ">
+        <li class="list-inline-item">Element 1</li>
+        <li class="list-inline-item">Element 2</li>
+        <li class="list-inline-item">Element 3</li>
+        <li class="list-inline-item">Element 4</li>
+        <li class="list-inline-item">Element 5</li>
+      </ul>
+
+      <p *ngSwitchDefault>Choisissez un format d'affichage</p>
+    </div>
+
+  </article>
+
+</section>
+
+<hr/>
+
+<section class="row">
+  <h3>Directives d'Attributs</h3>
+
+  <article>
+    <h4>ngClass</h4>
+
+    <p [ngClass]=" 'text-info font-monospace' ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur
+      ducimus eius est ipsa ipsam pariatur sit vel! Dicta excepturi laborum, nam nesciunt similique sint. Architecto
+      harum iste molestiae perferendis similique.</p>
+
+    <p [ngClass]=" ['text-warning', 'fw-bold'] ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur
+      ducimus eius est ipsa ipsam pariatur sit vel! Dicta excepturi laborum, nam nesciunt similique sint. Architecto
+      harum iste molestiae perferendis similique.</p>
+
+    <div class="btn-group btn-group-sm">
+      <button class="btn btn-outline-primary" (click)="payment = 'done' ">Validé</button>
+      <button class="btn btn-outline-primary" (click)="payment = 'pending'  ">En attente</button>
+      <button class="btn btn-outline-primary" (click)="payment = 'cancel'  ">Annulé</button>
+    </div>
+
+    <p>Etat du paiment:
+      <span class="badge" [ngClass]="{
+        'text-bg-primary': payment == 'pending',
+        'text-bg-success': payment == 'done',
+        'text-bg-danger': payment == 'cancel'
+      }"> {{ payment | titlecase }} </span>
+    </p>
+
+  </article>
+
+  <article>
+    <h4>Exemple ngClass</h4>
+
+    <div *ngFor="let product of products">
+      <h4> {{ product.name }} </h4>
+      <p>{{ product.price | currency }}</p>
+      <p [ngClass]="product.state">{{ product.state }}</p>
+      <hr />
+    </div>
+
+  </article>
+
+  <article>
+    <h4>ngStyle</h4>
+
+    <div class="btn-group btn-group-sm">
+      <button class="btn btn-outline-primary" (click)=" progress=10; bgcolor='red' ">10%</button>
+      <button class="btn btn-outline-primary" (click)="  progress=33; bgcolor='orange' ">33%</button>
+      <button class="btn btn-outline-primary" (click)="  progress=75; bgcolor='limegreen' ">75%</button>
+    </div>
+
+    <div class="progress my-3">
+      <div class="progress-bar" [ngStyle]=" { 'width': progress+'%', 'backgroundColor': bgcolor } "></div>
+    </div>
+
+    <div class="progress my-3">
+      <div class="progress-bar" role="progressbar" [style.width]="progress+'%'" [attr.aria-valuenow]="progress"
+           aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+  </article>
+
+</section>

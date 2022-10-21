@@ -1,0 +1,24 @@
+<header>
+  <h2>Exercice Todo List</h2>
+</header>
+
+<section class="row">
+  <div class="col-3">
+
+    <div class="list-group">
+      <button type="button" class="list-group-item list-group-item-action active"
+              *ngFor="let task of tasks; index as index" (click)="removeTask(index)">
+        {{ task }}
+      </button>
+    </div>
+
+  </div>
+  <div class="col-9">
+
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Saisissez une tache" [(ngModel)]="task" (keyup.enter)="addTask()" />
+      <button class="btn btn-outline-primary" (click)="addTask()">Ajouter</button>
+    </div>
+
+  </div>
+</section>

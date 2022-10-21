@@ -1,0 +1,77 @@
+<header>
+  <h2>Présentation</h2>
+</header>
+
+<section>
+  <h3>Interpolation</h3>
+
+  <p>1 + 2 = {{ 1+2 }}</p>
+
+  <p>Bonjour {{ firstname }}</p>
+
+  <p>{{ product.name }} @ {{ product.price }}€</p>
+
+  <h4>Affiché sécurisé (xss)</h4>
+  <p>{{ html }}, &lt;i&gt;coucou&lt;/i&gt;</p>
+
+  <h4>Affiché non sécurisé (contenu sécurisé)</h4>
+  <p [innerHTML]="html"></p>
+
+  <!-- image -->
+  <img src="{{ source }}" alt="chien extraterrestre" width="300" />
+
+  <img [src]="source" alt="chien extraterrestre" width="300" />
+
+  <img src="assets/images/loxy.jpeg" alt="chien extraterrestre" width="300" />
+</section>
+
+<section>
+  <h3>Event</h3>
+
+  <div>
+    <button (click)="hello()">Cliquez ici</button>
+  </div>
+
+  <div>
+    <a href="#" (click)="confirmation($event)">Supprimer cet ressource</a>
+  </div>
+</section>
+
+<section>
+  <h3>Two Way Data Binding</h3>
+  <p>MVVM ou MWM: Model View, View Model</p>
+  <p>Banana in box = [()]</p>
+  <div>
+    <input type="text" placeholder="Entrer votre message" [(ngModel)]="message" />
+  </div>
+  <p>{{ message }}</p>
+</section>
+
+<section>
+  <h3>Les variables de template</h3>
+  <p>Les variables de template se déclare avec <b>#nom</b> sur une balise HTML.
+    (document.querySelector() ou document.getElementById())</p>
+
+  <p>detectChange() = responsable de mettre à jour les vues en Angular (ngModel et event)</p>
+
+  <input type="text" class="form-control" placeholder="Indiquez votre nom" #input (keyup.enter)="0"
+         (keyup.control.s)="false"  />
+
+  <p>input: {{ input }}</p>
+  <p>type: {{ input.type }}</p>
+  <p>class: {{ input.className }}</p>
+  <p>value: {{ input.value }}</p>
+</section>
+
+<section>
+  <h3>ngForOf</h3>
+
+  <ul>
+    <li *ngFor="let name of users; index as key">{{ name }} (index = {{ key }})</li>
+  </ul>
+</section>
+
+<!--
+  array.push(value) => ajoute une valeur à la fin du tableau
+  array.splice(index, qte) => supprime une valeur du tableau
+-->

@@ -1,0 +1,24 @@
+<header>
+  <h2>Les filtres personnalisés</h2>
+</header>
+
+<div class="mb-3">
+  <input type="text" class="form-control" placeholder="Entrer un palindrome" [(ngModel)]="text" />
+</div>
+<p>{{ text | pipelindrome }}</p>
+
+
+<!-- 1er majuscule reste minuscule -->
+<button class="btn btn-outline-primary btn-sm mb-3 px-3" (click)="changeOrder()">Trier</button>
+<ul>
+  <li *ngFor="let name of users|sort:order">{{ name }}</li>
+</ul>
+
+<!--
+  sort
+  1st param = array
+  2nd param = string (*ASC/DESC)
+
+  array.sort()
+  array.reverse()
+-->

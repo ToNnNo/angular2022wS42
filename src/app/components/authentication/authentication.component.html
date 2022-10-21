@@ -1,0 +1,16 @@
+<header>
+  <h2>Connexion</h2>
+</header>
+
+<section>
+
+  <button class="btn btn-outline-primary my-3" (click)="login()" *ngIf="!isAuthenticate(); else deconnexion">
+    Se connecter
+  </button>
+
+  <ng-template #deconnexion>
+    <button class="btn btn-outline-primary my-3" (click)="logout()">
+      Se déconnecter
+    </button>
+  </ng-template>
+</section>

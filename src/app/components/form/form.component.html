@@ -1,0 +1,51 @@
+<header>
+  <h2>Template Driven Forms</h2>
+</header>
+
+<p class="small">Penser à importer le module <strong>FormsModule</strong> dans le <em>AppModule</em></p>
+<p class="small">Utilise le principe de <strong>Two Way Data Binding</strong> (ngModel & ngForm)</p>
+
+
+<section class="row">
+
+  <aside class="col-4">
+
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let product of products">
+        {{ product.name }} @ {{ product.price | currency }}
+      </li>
+    </ul>
+
+  </aside>
+
+  <article class="col-8">
+
+    <form (ngSubmit)="saveProduct(form)" #form="ngForm">
+
+      <div class="mb-3">
+        <label for="name">Nom: </label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Entrer le nom du produit"
+               required [(ngModel)]="product.name" #inputName="ngModel" [exist]="products" />
+          <div *ngIf="inputName.touched && inputName.invalid">
+            <p class="text-danger" *ngIf="inputName.hasError('required')">Le nom est obligatoire</p>
+            <p class="text-danger" *ngIf="inputName.hasError('exist')">Ce produit existe déjà</p>
+          </div>
+      </div>
+
+      <!-- pattern="regex" -->
+      <div class="mb-3">
+        <label for="price">Prix: </label>
+        <input type="text" name="price" id="price" class="form-control" placeholder="Entrer le prix du produit"
+               required [(ngModel)]="product.price" #inputPrice="ngModel" pattern="[0-9]+([\.|,][0-9]+)?" />
+        <div *ngIf="inputPrice.touched && inputPrice.invalid">
+          <p class="text-danger" *ngIf="inputPrice.hasError('required')">Le prix est obligatoire</p>
+          <p class="text-danger" *ngIf="inputPrice.hasError('pattern')">Le prix est incorrect</p>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary">Ajouter</button>
+    </form>
+
+  </article>
+
+</section>

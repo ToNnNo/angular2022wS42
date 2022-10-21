@@ -1,0 +1,28 @@
+<header>
+  <h2>Les Paramètres d'url</h2>
+</header>
+
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/parameters/john">John Doe</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/parameters', 'jane']">Jane Doe</a>
+  </li>
+</ul>
+
+<section *ngIf="name">
+  <dl class="row">
+    <dt class="col-2">Nom: </dt>
+    <dd class="col-10"> {{ name }} </dd>
+    <dt class="col-2">Adresse: </dt>
+    <dd class="col-10"> {{ address }}</dd>
+    <dt class="col-2" *ngIf="more">Age: </dt>
+    <dd class="col-10" *ngIf="more"> {{ age }}</dd>
+  </dl>
+  <a [routerLink]="['/parameters', slug]" [queryParams]="{ 'more': 1 }">Voir plus</a>
+
+  <footer>
+    <button class="btn btn-outline-dark btn-sm my-3" (click)="saveAndQuit()">Sauvegarder et Quitter</button>
+  </footer>
+</section>
